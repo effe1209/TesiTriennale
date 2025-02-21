@@ -1,0 +1,35 @@
+\section{XGBOD}
+% Scrivere introduzione all'analisi di XGBOD come stato dell'arte
+Partendo dai risultati ottenuti per la validazione del paper OPS\textunderscore SAT, prendiamo in analisi il modello XGBOD, per poter effettuare un confronto con le metodologie che proporremo successivamente effettuando test e analizzando i risultati ottenuti.
+
+XGBOD (eXtreme Gradient Boosting for Outlier Detection) è un algoritmo composto da tre fasi:
+\begin{enumerate}
+    \item Generazione di nuove rappresentazioni di dati: vengono applicati vari metodi di rilevamento di anomalie non supervisionati ai dati originali, per ottenere punteggi di anomalie, questi rappresentano la nuova vista dei dati;
+    \item Selezione dei punteggi rilevanti: i punteggi ottenuti nella fase precedente vengono filtrati per usare solo quelli utili, quest'ultimi sono combinati con le caratteristiche iniziali, creando un nuovo spazio delle caratteristiche arricchito;
+    \item Addestramento del modello XGBoost: viene addestrato il modello XGBoost su questo nuovo spazio delle caratteristiche e le previsioni che otteniamo determinano se ogni dato è un'anomalia o no.
+\end{enumerate}
+Utilizziamo XGBOD invece che XGBoost direttamente perché quest'ultimo, essendo un modello supervisionato, ha bisogno di dati etichettati e soprattutto con anomalie rare, non facili da etichettare.
+
+XGBOD aggiunge una parte di preprocessing, aumenta le informazioni del set di dati con punteggi di anomalie ed utilizza metodi di rilevamento non supervisionato come Isolation Forest, Local Outlier Factor, ecc..
+
+\subsection{XGBoost}
+Il modello XGBoost di tipo supervisionato, si sviluppa con un processo iterativo di addestramento di alberi decisionali deboli (alberi decisionali poco profondi e quindi poco accurati), questi vengono combinati tra di loro portando un miglioramento progressivo delle prestazioni del modello.
+
+XGBoost è composto da pochi passi ma ripetuti iterativamente: come primo passo vengono calcolati i residui, la differenza tra le previsioni iniziali ed i valori reali; questi sono i valori che vogliamo ridurre. Con questi valori il modello addestra un insieme di alberi decisionali deboli, dove ognuno cerca di correggere questi valori migliorando le previsioni del modello precedente. Tutti gli alberi vengono aggiunti al modello complessivo di XGBoost, che aggiorna le sue previsioni combinando tutti gli alberi precedentemente costruiti.
+
+Per regolare tutto questo processo, sono applicate internamente tecniche di limitazione e regolazione per evitare un overfitting del modello. All'interno di XGBoost è presente anche una metrica chiamata \textit{tasso di apprendimento}, che permette di decidere quanto un albero incide sul risultato finale, minimizzando così gli errori di percorso.
+
+\subsection{Risultati ottenuti}
+Qui sono elencati i risultati ottenuti effettuando varie prove con parametri diversi per ottimizzare XGBOD ed ottenere il miglior compromesso tra efficienza ed efficacia.
+\vspace{0.4cm}
+\input{Tabelle/TabellaXGBOD}
+\pagebreak
+
+LEGENDA:
+\begin{itemize}
+    \item M+P: indica l'utilizzo di più modelli, oltre a quelli utilizzati di default,   combinati all'uso di parametri, questo per migliorare le prestazioni complessive;
+    \item Grid: è una tecnica che esplora tutte le possibili combinazioni di iperparametri predefiniti (n\textunderscore estimators, max\textunderscore depth e learning\textunderscore rate) per trovare la configurazione che restituisce i migliori risultati;
+    \item EarlyStop: viene utilizzato un meccanismo di EarlyStop che ferma l'esecuzione dell'algoritmo quando gli iperparametri non migliorano più per un numero definito di cicli.
+\end{itemize}
+
+Dalla Tabella \ref{tab:XGBOD_table} possiamo vedere che il miglior risultato è quello che utilizza più modelli per l'addestramento ed i parametri modificati al fine di efficientare l'esecuzione. Oltre ad avere degli ottimi risultati, l'esecuzione rimane praticamente istantanea sul nostro dataset di esempio OPS\textunderscore SAT.

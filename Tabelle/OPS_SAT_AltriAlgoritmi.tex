@@ -1,0 +1,28 @@
+\begin{table}[h!]
+    \centering % Correttamente posizionato
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{Algoritmo} & \textbf{Accuracy} &\textbf{Precision}  & \textbf{Recall} & \textbf{F1} & \textbf{MCC} & \textbf{AUC-PR} & \textbf{AUC-ROC} & \textbf{N-Scores}\\
+        \hline
+        \multicolumn{9}{|c|}{\textbf{ROCKET}} \\
+        \hline
+         \textbf{OneClassSVM} & 0.192 & 0.126 & 0.134 &0.13  & -0.1 & \textbf{0.463}& \textbf{0.392}& \textbf{0.371}\\
+        \hline
+        \textbf{Isolation Forest} & 0.385 & 0.144 & 0.269 &0.187  & -0.132 & 0.442& 0.336&0.339 \\
+        \hline
+        \textbf{Local Outlier Factor} & \textbf{0.4} & \textbf{0.148} &\textbf{ 0.28} &\textbf{0.194}  & \textbf{-0.098} & 0.441& 0.334&\textbf{0.371} \\
+        \hline
+        \multicolumn{9}{|c|}{\textbf{ROCKAD}} \\
+        \hline
+         \textbf{OneClassSVM} & 0.3 & \textbf{0.3} & 0.3 &0.3  & -0.4 & 0.757& 0.704 &0.677\\
+        \hline
+        \textbf{Isolation Forest} & 0.277 & 0.234 & 0.287 &0.247  & -0.476 & 0.757& 0.704&0.677 \\
+        \hline
+        \textbf{Local Outlier Factor} & \textbf{0.408} & 0.295 & \textbf{0.426} &\textbf{0.31}  & \textbf{-0.246} & 0.757& 0.704&0.677\\
+        \hline
+        \end{tabular}
+    \end{adjustbox}
+    \caption{Algoritmi diversi a confronto, ROCKET e ROCKAD su OPS\textunderscore SAT}
+    \label{tab:AlgoritmiVari_OPS_SAT}
+\end{table}

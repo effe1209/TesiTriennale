@@ -1,0 +1,30 @@
+\begin{table}[h!]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+         \textbf{Modalità} & \textbf{Accuracy} &\textbf{Precision}  & \textbf{Recall} & \textbf{F1} & \textbf{MCC} & \textbf{AUC-PR} & \textbf{AUC-ROC} & \textbf{N-Scores}&\textbf{Tempo}\\
+        \hline
+        (10, 1000) &0.492& 0.476& 0.645& 0.548&-0.002& 0.755 &0.702 & 0.677 & 1m 49s \\
+         \hline
+         (10, 5000) &0.538& 0.514& 0.613& 0.559&0.084& 0.76 &0.705 & 0.677&1m 52.7s\\
+         \hline
+        (10,10.000)&\textbf{0.546} &\textbf{0.515} &\textbf{0.823} &\textbf{0.634} & \textbf{0.137}& 0.757& 0.704&0.677& 2m 12.5s\\
+         \hline
+         (20,10.000)&0.454 &0.447 &0.613 &0.517 &-0.082 &0.758 &0.705& 0.677&2m 37.4s\\
+         \hline
+         (30,10.000)&0.508 &0.489 &0.71 &0.579 &0.036 &\textbf{0.762} &\textbf{0.709}& 0.677& 3m 17.1s\\
+         \hline
+         (35,10.000)&0.515 &0.494 &0.71 &0.583 & 0.052 &\textbf{0.762} &0.708& 0.677&3m 31s\\
+         \hline
+         (40,10.000)&0.531 &0.506 &0.71 &0.591 &0.082 &\textbf{0.762} &0.707& 0.677&3m 44.2s\\
+         \hline
+         (10,20.000)&0.538 &0.513 &0.645 &0.571 &0.088 &0.758 &0.705& 0.677&2m 52.3s\\
+         \hline
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Test con numero di estimatori e kernel variabile}
+    \label{tab:ROCKAD_OPS-SAT}
+\end{table}
+
+% da aggiungere alemeno una prova con 20.000 kernel ed una con 1000 ossia quello di default

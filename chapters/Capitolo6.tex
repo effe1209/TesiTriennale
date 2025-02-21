@@ -1,0 +1,44 @@
+\chapter{Conclusioni}
+% Riportare dati dei tre algoritmi XGBOD, ROCKET e ROCKAD
+% Supervised si comportano meglio di quelli Unsupervised
+% Con NASA  i risultati sono ancora migliorabili ma ROCKET è una soluzione che potrebbe essere promettente soprattutto per il fatto che aumenta il numero di caratteristiche con un costo computazionale relativamente contenuto
+% Bisogna però trovare il compromesso tra complessità e performance
+% ROCKET è utilizzabile per anomaly detection? -> Si ma bisogna rendere più ottimizzata l'esecuzione soprattutto con un numero maggiore di kernel, questo però soprattutto per l'esecuzione con NASA che richiede molto tempo
+% Su OPS_SAT l'esecuzione è molto più rapida per ROCKET
+
+%---- FORSE AGGIUNGERE TEMPI ESECUZIONE ROCKET E ROCKAD su OPS_SAT ----
+
+In questo documento abbiamo analizzato ed esplorato nuovi approcci per il rilevamento di anomalie, proponendoci di sperimentare nuove metodologie in quest'ambito, cercando di fornire più informazioni possibili per i futuri ricercatori che vorranno approfondire l'utilizzo di ROCKET, così da agevolare in tal senso il suo utilizzo.
+Lo scopo di questo documento è incentrato anche sull'analisi delle performance e della possibilità di utilizzare questi algoritmi in contesti reali.
+
+Il lavoro inizialmente è stato effettuato sul dataset OPS\textunderscore SAT dell'ESA, che ci ha permesso un accesso facilitato alla sperimentazione e allo sviluppo di tecniche di rilevamento delle anomalie.
+Successivamente, siamo passati a lavorare sul dataset NASA, testando i modelli in questione sotto vari valori degli iperparametri, confrontando prestazioni ed efficienza in ognuno, in un contesto più ampio e realistico.
+
+Da questi test e dalle successive analisi dei dati ottenuti, è stato possibile rilevare che l'efficienza di ROCKET e ROCKAD è dipendente dal valore assegnato a STEP (la lunghezza delle sotto sequenze della timeseries); questo valore è particolarmente importante, soprattutto sul dataset OPS\textunderscore SAT, poiché da esso dipende la velocità di esecuzione.
+Allo stesso modo, per il dataset NASA, l'efficienza dipende strettamente dal valore di OFFSET, che permette l'overlapping (sovrapposizione di segmenti consecutivi per aumentare il numero di sotto sequenze).
+In particolare, osserviamo che fissando il numero di kernel a 10.000, i valori di STEP inferiori a 250 sono sconsigliati, mentre valori di OFFSET inferiori a 50 portano ad un aumento esponenziale del tempo di esecuzione, oltre ad una classificazione peggiore rispetto a tali valori.
+Bisogna anche menzionare il problema relativo alla classificazione riguardante il dataset NASA: con un valore di OFFSET maggiore di quello indicato, potrebbe portare ad una mancanza di nodi vicini per il classificatore KNN.
+
+Per il dataset OPS\textunderscore SAT, gli iperparametri migliori risultanti dai nostri test risultano essere:
+\begin{enumerate}
+    \item XGBOD: il miglior risultato è stato ottenuto tramite la modalità che utilizza più modelli, ossia KNN, LOF, ABOD e OCSVM e con i seguenti parametri n\textunderscore estimators=100, max\textunderscore depth=3 e learning\textunderscore rate=0.2;
+    \item ROCKET: i risultati ottimali risultano essere con un numero di kernel uguale a 10.000 e l'utilizzo del classificatore supervised RidgeClassifierCV;
+    \item ROCKAD: con un numero di kernel pari a 10.000 e un numero di estimatori uguale a 10, siamo riusciti ad ottenere il miglior risultato, sia per tempo di esecuzione che per metriche riscontrate.
+\end{enumerate}
+
+Per quanto riguarda il dataset NASA e considerando ROCKET con un numero di kernel pari a 1000 o 10.000, un numero di vicini uguale ad 1 ed un OFFSET di 50 otteniamo un buon rapporto tra accuratezza e velocità di esecuzione.
+Questi risultati ci fanno ben sperare nell'applicazione futura di questo modello per il rilevamento delle anomalie, soprattutto in merito al suo utilizzo in maniera supervised, con dati etichettati, dato il suo basso costo computazionale e la capacità di rilevare correttamente la maggior parte delle anomalie.
+
+Non possiamo affermare le stesse conclusioni per ROCKAD, che ha dimostrato varie limitazioni relative al costo computazionale più elevato rispetto a ROCKET, questo porta spesso ad un tempo di esecuzione molto elevato che non si rispecchia però in metriche altrettanto buone.
+Tramite i test effettuati, i miglior risultati sono stati ottenuti con 1000 kernel, 2 vicini e un OFFSET pari a 30, portando così ad avere un numero di caratteristiche estratte inferiori, conservando metriche uguali ed un tempo di esecuzione nettamente migliore, rispetto ad avere 10.000 kernel.
+ROCKAD rimane comunque consigliato nell'utilizzo con dati non etichettati, a causa della sua implementazione.
+
+Questo documento ci apre la strada verso nuove ricerche future.
+Sicuramente è di fondamentale importanza concentrarsi sull'ottimizzazione di questi algoritmi, esplorando ulteriormente i parametri per ridurre il più possibile i tempi di esecuzione.
+Un altro aspetto da considerare, soprattutto per l'utilizzo sui satelliti, è l'efficientamento. Questo può avvenire tramite tecniche di Transfer Learning e Fine-Tuning, così da rendere i modelli più leggeri da utilizzare.
+
+Il passo successivo è l'utilizzo degli algoritmi su altri dataset, testando le prestazioni e valutandone la robustezza in contesti diversi.
+Questi risultati servono come punto di partenza per avere dei valori di riferimento degli algoritmi con cui validare o confrontare metodi nuovi.
+
+Il documento rappresenta un contributo nell'ambito del rilevamento delle anomalie, fornendo un primo passo verso la comprensione delle potenzialità e delle limitazioni degli algoritmi ROCKET, ROCKAD e XGBOD per l'utilizzo a bordo dei satelliti.
+I risultati forniscono una base per lo sviluppo ulteriore di sistemi di monitoraggio più efficienti e affidabili per le missioni satellitari, con particolare attenzione all'ottimizzazione del consumo delle risorse dei satelliti.

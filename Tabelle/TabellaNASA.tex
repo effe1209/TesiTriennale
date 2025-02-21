@@ -1,0 +1,118 @@
+\begin{table}[!ht]
+    \centering % Correttamente posizionato
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{Accuracy} &\textbf{Precision}  & \textbf{Recall} & \textbf{F1} & \textbf{MCC} & \textbf{AUC-PR} & \textbf{AUC-ROC} & \textbf{NScore}\\
+        \hline
+        \multicolumn{8}{|c|}{\textbf{ROCKET}} \\
+        \hline
+        \multicolumn{8}{|c|}{kernel=10.000, n\textunderscore neighbors=1 e OFFSET=50} \\
+        \hline
+         \textbf{0.735} & \textbf{0.299} & 0.471 &0.366  & \textbf{0.232 }& 0.286& 0.652 & 0.378 \\
+        \hline
+        \multicolumn{8}{|c|}{kernel=10.000, n\textunderscore neighbors=2 e OFFSET=30} \\
+        \hline
+         0.719 & 0.284 & \textbf{0.482} &0.357  & 0.219 & 0.28& 0.647 & 0.371 \\
+        \hline
+        \multicolumn{8}{|c|}{kernel=1000, n\textunderscore neighbors=1 e OFFSET=50} \\
+        \hline
+         0.731 & 0.296 & 0.478 &\textbf{0.367}  & 0.231 & \textbf{0.288}& \textbf{0.654} & \textbf{0.384} \\
+        \hline
+        \multicolumn{8}{|c|}{kernel=1000, n\textunderscore neighbors=2 e OFFSET=30} \\
+        % da cambiare
+        \hline
+         0.721 & 0.284 & 0.473 &0.355  & 0.217 & 0.281& 0.647 & 0.37 \\
+        \hline
+        \multicolumn{8}{|c|}{kernel=1000, n\textunderscore neighbors=5 e OFFSET=10} \\
+        % da cambiare
+        \hline
+         0.730 & 0.295 & 0.477 &0.365  & 0.230 & 0.278& 0.648 & 0.382 \\
+         \hline
+        \multicolumn{8}{|c|}{\textbf{ROCKAD}} \\
+        \hline
+        \multicolumn{8}{|c|}{kernel=10.000, n\textunderscore neighbors=1 e OFFSET=50} \\
+        \hline
+        \textbf{0.593} & 0.106 & 0.19 &0.136  & -0.129 &0.287 &\textbf{0.651}  &0.378 \\
+        \hline
+        \multicolumn{8}{|c|}{kernel=10.000, n\textunderscore neighbors=2 e OFFSET=30} \\
+        \hline
+        0.628 & \textbf{0.131} & 0.207 &0.16  & \textbf{-0.076} &\textbf{0.29} &0.646  &0.379 \\
+        \hline
+        \multicolumn{8}{|c|}{kernel=1000, n\textunderscore neighbors=2 e OFFSET=50} \\
+        \hline
+        0.6 & 0.106 & 0.193 &0.137  & -0.131 &0.286 &\textbf{0.651}  &0.378 \\
+        \hline
+        \multicolumn{8}{|c|}{ROCKAD con 1000 kernel, n\textunderscore neighbors=2 e OFFSET=30} \\
+        \hline
+        0.614 & 0.129 & \textbf{0.218} &\textbf{0.162}  & -0.083 &\textbf{0.29} &0.646  &\textbf{0.381} \\
+        \hline
+        \multicolumn{8}{|c|}{kernel=1000, n\textunderscore neighbors=5 e OFFSET=10} \\
+        % da cambiare
+        \hline
+         0.453 & 0.093 & 0.25 &0.136  & 0.26 & 0.292& 0.65 & \textbf{0.381 }\\
+        \hline
+        \end{tabular}
+    \end{adjustbox}
+    \caption{Calcolo delle metriche globali (con la somma TP, TF, FP, FN)}
+    \label{tab:NASA_Posticipato}
+\end{table}
+\begin{table}[!ht]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{Accuracy} &\textbf{Precision}  & \textbf{Recall} & \textbf{F1} & \textbf{MCC} & \textbf{AUC-PR} & \textbf{AUC-ROC} & \textbf{NScore}\\
+        \hline
+        \multicolumn{8}{|c|}{\textbf{ROCKET}} \\
+        \hline
+        \multicolumn{8}{|c|}{kernel=10.000, n\textunderscore neighbors=1 e OFFSET=50} \\
+        \hline
+        \textbf{0.723} & \textbf{0.357} & 0.499 &0.328  & 0.0 &0.736 & 0.514 & 0.0\\
+        \hline
+        \multicolumn{8}{|c|}{kernel=10.000, n\textunderscore neighbors=2 e OFFSET=30} \\
+        \hline
+        0.709 & 0.341 & \textbf{0.519} &\textbf{0.337}  & 0.0 &0.736 & \textbf{0.517} & 0.0\\
+        \hline
+        \multicolumn{8}{|c|}{kernel=1000, n\textunderscore neighbors=1 e OFFSET=50} \\
+        \hline
+        0.722 & 0.354 & 0.501 &0.320  & 0.0 &0.738 & 0.510 & 0.0\\
+        \hline
+        \multicolumn{8}{|c|}{kernel=1000, n\textunderscore neighbors=2 e OFFSET=30} \\
+        % da cambiare
+        \hline
+        0.712 & 0.327 & 0.499 &0.319  & 0.0 &0.737 & 0.509 & 0.0\\
+        \hline
+        \multicolumn{8}{|c|}{kernel=1000, n\textunderscore neighbors=5 e OFFSET=10} \\
+        % da cambiare
+        \hline
+        0.719 & 0.355 & 0.504 &0.332  & 0.0 &\textbf{0.741} & 0.505 & 0.0\\
+        \hline
+        \multicolumn{8}{|c|}{\textbf{ROCKAD}} \\
+        \hline
+        \multicolumn{8}{|c|}{ROCKAD con 10.000, n\textunderscore neighbors=2 e OFFSET=50} \\
+        \hline
+        0.593 & 0.119 & 0.167 &0.09  & -0.111 & \textbf{0.729}& \textbf{0.516} & 0.454\\
+        \hline
+        \multicolumn{8}{|c|}{kernel=10.000, n\textunderscore neighbors=2 e OFFSET=30} \\
+        \hline
+        \textbf{0.622} & 0.114 & 0.191 &0.108  & -0.079 & 0.728& 0.514 & \textbf{0.473}\\
+        \hline
+        \multicolumn{8}{|c|}{ROCKAD con 1000 kernel, n\textunderscore neighbors=2 e OFFSET=50} \\
+        \hline
+        0.594 & 0.107 & 0.16 &0.088  & -0.109 & 0.725& 0.510 & 0.455\\
+        \hline
+        \multicolumn{8}{|c|}{kernel=1000, n\textunderscore neighbors=2 e OFFSET=30} \\
+        \hline
+        0.612 & \textbf{0.128} & 0.192 &0.115  & -0.09 & 0.723& 0.503 & 0.448\\
+        \hline
+        \multicolumn{8}{|c|}{kernel=1000, n\textunderscore neighbors=5 e OFFSET=10} \\
+        % da cambiare
+        \hline
+        0.476 & 0.127 & \textbf{0.291} &\textbf{0.14}  & \textbf{0.136} &0.728 & 0.499 & 0.467\\
+        \hline
+        \end{tabular}
+    \end{adjustbox}
+    \caption{Metriche calcolate con la media}
+    \label{tab:NASA_Media}
+\end{table}

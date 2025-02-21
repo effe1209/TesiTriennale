@@ -1,0 +1,71 @@
+\chapter{Introduzione}
+\section{Rilevamento di Anomalie nei Satelliti}
+Negli anni si è fatto sempre più presente il bisogno di esplorare lo spazio puntando sempre più lontano, studiando e comprendendo le regole e le strutture dell'universo partendo dall'osservazione di quest'ultimo. Con l'avanzare della tecnologia abbiamo potuto avvicinarci allo spazio tramite i satelliti posizionati in orbita intorno alla Terra; questi sono circa 3500 attivi e si è fatta sempre più importante la richiesta di rilevare le anomalie di tali satelliti e comunicandole alla stazione di controllo, portando un aumento nello scambio di informazioni con un costo non irrilevante data la banda limitata.
+Prima dell'avvento dell'intelligenza artificiale, la rilevazione delle anomalie era lasciata ad un'analisi statica delle componenti ed un controllo di qualità con regole e soglie fisse; questo ovviamente portava ad avere un'alta probabilità di ricevere tante segnalazioni di anomalie non rilevanti$^{\text{\cite{extract_Caratteristiche}}}$ o date da cambiamenti nei riferimenti che creano un diverso ambiente vanificando i controlli statici.
+Con l'intelligenza artificiale siamo riusciti ad avere un rilevamento adattivo in base all'ambiente che portava a riscontrare un numero minore di false anomalie, ma anche questo approccio portava con se delle problematiche: l'algoritmo di intelligenza artificiale veniva allenato nel centro di controllo su dati reali e poi spedito sul satellite, ogni volta che bisognava modificare i parametri dell'algoritmo, bisognava ripetere tutto il processo dato che i satelliti, all'interno, hanno un processore poco prestante e quindi non sufficiente ad eseguire l'allenamento degli algoritmi, sprecando così tanta banda e molto tempo di trasmissione.
+
+\section{Contesto di Intelligenza Artificiale}
+Il machine learning, o apprendimento automatico, è un ramo dell'intelligenza artificiale che permette di imparare dai dati senza essere programmati esplicitamente ed essere eseguiti in maniera statica.
+Infatti, questi modelli possono migliorare le loro prestazioni identificando schemi nei dati, anche detti pattern, che poi utilizzano per fare previsioni o prendere decisioni in base all'utilizzo di cui abbiamo bisogno.
+
+In relazione al nostro scopo, il machine learning è usato per rilevare anomalie, questa è una missione importante per riconoscere comportamenti imprevisti o anomali in diversi sistemi, come quelli satellitari, nel caso specifico.
+L'identificazione di anomalie nei satelliti è fondamentale per permettere una gestione rapida e puntuale per risolvere eventuali problemi; questo potrebbe ridurre i costi operativi e aumentare la resilienza del sistema.
+
+Nel machine learning abbiamo tre categorie principali:
+\begin{itemize}
+    \item Apprendimento supervisionato (supervised): i modelli di questo tipo sono addestrati su dati etichettati, cioè dove ad ogni esempio è associato il valore o la risposta desiderata, quelli che successivamente chiameremo ground truth;
+    \item Apprendimento non supervisionato (unsupervised): al contrario dei modelli supervised questi apprendono da dati senza etichettatura, cercando di trovare delle strutture ricorrenti, un esempio sono i cluster\footnote{I cluster sono insiemi di dati che hanno almeno un elemento comune};
+    \item Apprendimento Semi-Supervisionato e rinforzato: questi modelli combinano parti delle due categorie precedenti e si concentrano su interazioni dinamiche con l'ambiente.
+\end{itemize}
+\pagebreak
+
+\section{Panoramica su Rilevamento di Anomalie}
+Quando parliamo di anomalie intendiamo un parametro o un osservazione che si distacca in modo marcato dalla normalità; di conseguenza il rilevamento delle anomalie è l'identificazione delle stesse che possono differire in tre tipologie:
+\begin{itemize}
+    \item Point Anomalies o anomalie puntuali: sono singoli punti che si discostano dal resto del dataset;
+    \item Contextual Anomalies o anomalie contestuali: sono dati che in un contesto specifico risultano anomali, un esempio può essere un intervallo temporale;
+    \item Collective Anomalies: sono gruppi di dati o osservazioni che prese tutte insieme rappresentano un comportamento anomalo.
+\end{itemize}
+
+Oltre alle difficoltà nell'identificazione delle anomalie data dalle diverse situazioni e i diversi tipi di anomalie che possono presentarsi, sono presenti anche problematiche per quanto riguarda i dati.
+Quest'ultimi, che vengono raccolti durante le missioni spaziali, non sono uniformi dal momento che le anomalie rappresentano una minoranza nel totale.
+Un altra problematica è legata all'etichettatura$^{\text{\cite{inproceedings}}}$ di questi dati che potrebbe essere costosa da fare e in alcuni casi può non essere presente (come nel dataset NASA che vedremo).
+L'ultima sfida è adattarsi ai dati in continuo cambiamento nell'arco della missione$^{\text{\cite{Rilevamento_Automatico_OPS-SAT}}}$.
+
+\section{Panoramica sull'Efficientamento}
+Efficientare un algoritmo significa renderlo eseguibile in maniera ottimizzata, anche utilizzando macchine con caratteristiche molto restringenti e con poche risorse hardware, come ad esempio la CPU poco performante presente sui satelliti.
+Una tecnica fondamentale per questo obbiettivo è il Transfer Learning, ossia il riutilizzo di un modello già addestrato su un dataset, riadattandolo al nuovo compito o al dataset che vogliamo utilizzare. Questo processo può essere effettuato in diversi modi:
+\begin{itemize}
+    \item Estrazione delle Caratteristiche: consiste nell'estrarre caratteristiche utili dai dati, senza modificare i pesi calcolati nel training precedente;
+    \item Fine-Tuning:
+    \begin{itemize}
+        \item Addestramento sull'intera rete: in questo caso aggiorniamo i pesi eseguendo di nuovo il training sul dataset in esame;
+        \item Addestramento del Classificatore Finale: aggiorniamo solo gli stati più profondi (finali) della rete, mentre i pesi dei primi rimangono congelati;
+        \item Addestramento a Blocchi: i pesi dei blocchi vengono aggiornati singolarmente effettuando l'addestramento blocco per blocco.
+    \end{itemize}   
+\end{itemize}
+
+% Per il nostro scopo possiamo effettuare diversi tipi di fine-tuning:
+% \begin{enumerate}
+%     \item Precisione dei Pesi: i pesi derivati dall'addestramento della rete hanno una precisione, ossia il numero di bit che vengono usati per rappresentare il numero, diminuendola impiegheremo meno memoria necessaria e velocizzeremo la velocità di calcolo;
+%     \item Riducendo la Complessità del Modello: possiamo eliminare nodi poco significativi tramite la tecnica detta pruning, diminuendo anche la quantità di operazioni necessarie;
+%     \item Compromesso Concorrenza Aggiornamento pesi: il batch size ossia il numero di pesi che si attende prima di aggiornarli evitando di farlo ogni volta per non sprecare risorse di calcolo, incentivando così la concorrenza;
+%     \item Ridurre tempo di addestramento: riducendo il numero di epoche, ossia il numero di volte in cui il dataset viene passato attraverso il modello durante la fase di allenamento.
+% \end{enumerate}
+\section{NASA ed ESA}
+Negli anni sia la NASA$^{\text{\cite{LSTM}}}$ (National Aeronautics and Space Administration) che l'ESA$^{\text{\cite{ESA_benchmark}}}$ (Agenzia Spaziale Europea) hanno pubblicato molteplici dataset contenenti dati reali di missioni e relativi benchmark sull'esecuzione di algoritmi di intelligenza artificiale per trovare il giusto compromesso tra efficacia e efficienza di un algoritmo, focalizzandosi maggiormente sul trovare l'algoritmo migliore per il rilevamento delle anomalie.
+
+I dataset sono stati resi pubblici per incentivare la comunità a contribuire alla ricerca di nuove tecniche di monitoraggio e rilevamento delle anomalie, potendo usare dati reali.
+
+\section{Obiettivo}
+Partendo dai dati proposti nel più semplice dataset OPS\textunderscore SAT$^{\text{\cite{OPS-SAT}}}$ e successivamente comprendendo il benchmark di NASA, vogliamo analizzare quali test sono stati effettuati per capire come poter fare un ulteriore passo in avanti nel rilevamento continuo di anomalie, cercando di rendere più efficiente un algoritmo già efficace, in modo da poterlo allenare direttamente sul satellite, limitando così lo scambio di comunicazioni e restringendo ancora di più il rilevamento di false anomalie.
+
+Tutto questo processo è dedito a trovare un algoritmo che abbia un giusto compromesso tra efficienza ed efficacia, così che possa rilevare in modo corretto la maggioranza delle anomalie senza però avere un costo molto alto in termini di consumo di banda e di risorse del satellite.
+
+In primo luogo procederemo a scendere più nello specifico aggiungendo o aggiustando i parametri di alcuni algoritmi tra cui XGBOD$^{\text{\cite{XGBOD}}}$.
+Per validare l'implementazione fatta portiamo a sostegno risultati ottenuti effettuando test e confronti tra un'implementazione standard e la nostra proposta mettendo a paragone le metriche di valutazione.
+
+In secondo luogo vogliamo proporre un'implementazione di due algoritmi, ROCKET e ROCKAD, sui quali, recentemente, sono stati pubblicati articoli dove si afferma la loro bassa complessità e le ottime performance sull'analisi delle timeseries.
+Per questi motivi abbiamo adattato questi algoritmi per il rilevamento delle anomalie su timeseries, applicando preprocessing ai dati estratti dai dataset. Partendo dal dataset OPS\textunderscore SAT, tramite vari test, abbiamo estrapolato vari risultati di test e metriche corrispondenti per poi spostarci su NASA, a cui accediamo tramite SpaceAI $^{\text{\cite{SpaceAI}}}$, al quale abbiamo collaborato per integrare i nostri contributi. Anche su questo dataset sono state riportate metriche di valutazione, allo scopo di poter confrontare gli algoritmi in termini di efficacia ed efficienza.
+Tutti questi test portano ad un confronto e una verifica ulteriore dell'effettiva possibilità di applicazione di questo nuovo algoritmo, ancora non usato nel contesto della rilevazione delle anomalie; proponendo riflessioni e ragionamenti avvalorati da dati riscontrati nei test effettuati.
+

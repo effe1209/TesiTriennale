@@ -1,0 +1,28 @@
+\chapter{Machine Learning per l'Anomaly Detection}
+
+In questo capitolo viene esposto il flusso che abbiamo seguito e le scelte effettuate per la realizzazione di quest'analisi empirica.
+
+\section{Esplorazione dei Dataset}
+Il primo approccio avviene tramite un approfondita esplorazione dei dataset reali disponibili, concentrandosi maggiormente su OPS\textunderscore SAT e NASA, entrambi con caratteristiche e peculiarità uniche, di interesse per il contesto satellitare.
+
+Questi dataset sono stati presi in esempio, non solo per avere un confronto diretto con il repository di SpaceAI$^{\text{\cite{SpaceAI}}}$, ma anche per le sfide nell'ambito della rilevazione di anomalie, come la scarsa quantità di queste, i problemi relativi all'etichettatura e i dati che a volte possono mancare.
+
+OPS\textunderscore SAT, permette un primo approccio molto più tranquillo, portando una struttura semplice, in modo che sia facile da comprendere e da utilizzare per lo sviluppo di nuovi algoritmi.
+NASA, d'altro canto, è il dataset che rappresenta di più la realtà, portando dati più complessi, che sarà utilizzato come banco di prova più realistico.
+
+
+\section{Flusso di Lavoro}
+Il primo approccio, come abbiamo spiegato precedentemente, avviene con il dataset OPS\textunderscore SAT, dal quale, dopo aver validato tutti i risultati ottenuti dai modelli del relativo paper, abbiamo cercato di migliorare XGBOD, uno dei migliori modelli per capacità di rilevare le anomalie e velocità di esecuzione. Abbiamo effettuato test per trovare i migliori iperparametri basandoci sulle metriche e sul tempo di esecuzione.
+
+Su OPS\textunderscore SAT siamo poi passati all'implementazione di ROCKET, apportando modifiche ai dati estratti per renderli compatibili ed utilizzabili con ROCKET.
+Data la natura di ROCKET, che utilizza le serie temporali, siamo riusciti ad utilizzarlo come estrattore di caratteristiche per poi utilizzarle con un classificatore per ottenere i risultati voluti.
+Come classificatori abbiamo utilizzato vari modelli, sia unsupervised che supervised, tra cui l'uso di una threshold in percentuale, utilizzando il 95° percentile dei punteggi di anomalia; ulteriori prove sono state effettuate con KNN, LogisticRegression, Ridge e RidgeClassifierCV che troviamo utilizzati anche nel paper di ROCKET$^{\text{\cite{paper_rocket}}}$.
+Lo stesso processo è stato effettuato con ROCKAD utilizzando però come classificatore il modello proposto nel paper di riferimento$^{\text{\cite{rockad_paper}}}$, NearestNeighborOCC.
+
+Partendo da OPS\textunderscore SAT siamo arrivati a NASA per ottenere una conferma dell'efficienza ed efficacia degli algoritmi.
+In questo dataset, al contrario di OPS\textunderscore SAT, l'etichettatura dei dati di training non è presente potendo così utilizzare solo modelli unsupervised.
+Anche per questo dataset c'è stata la necessità di rendere i dati compatibili per l'utilizzo.
+
+Tutti i risultati ottenuti sono stati proposti in tabelle ordinate e analizzati per trarne le conclusioni, in rifermento soprattutto a ROCKET il quale è stato utilizzato per la prima volta come metodo per il rilevamento delle anomalie, valutandone così la vera potenza e efficienza.
+
+\input{chapters/Sezione1Capitolo2.tex}

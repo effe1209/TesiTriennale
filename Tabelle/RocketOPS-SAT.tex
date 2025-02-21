@@ -1,0 +1,28 @@
+\begin{table}[h!]
+    \centering % Correttamente posizionato
+    \begin{adjustbox}{max width=\textwidth}
+        \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+        \hline
+        \textbf{Modalità} & \textbf{Accuracy} &\textbf{Precision}  & \textbf{Recall} & \textbf{F1} & \textbf{MCC} & \textbf{AUC-PR} & \textbf{AUC-ROC} & \textbf{NScore}&\textbf{Tempo}\\
+        \hline
+        \multicolumn{10}{|c|}{\textbf{Unsupervised}} \\
+        \hline
+        \textbf{Threshold} & 0.546 & \textbf{1.0} & 0.048 &0.092  & 0.161 & 0.46 & 0.468 & 0.419 &7s \\
+        \hline
+        \multicolumn{10}{|c|}{\textbf{Supervised}} \\
+        \hline
+         \textbf{RidgeCV} &\textbf{ 0.777} & 0.704 & \textbf{0.919} &\textbf{0.797}  & \textbf{0.584} & 0.787& 0.829 &0.726&6.6s \\
+        \hline
+        \textbf{LogisticReg} & \textbf{0.777} & 0.704 & \textbf{0.919} &\textbf{0.797}  &\textbf{ 0.584} & 0.773& 0.837 &\textbf{0.774} &53.3s\\
+        \hline
+        \textbf{RidgeReg} & 0.538 & \textbf{1.0} & 0.032 &0.062  & 0.131 & \textbf{0.779}& \textbf{0.844} &0.758 &5.8s \\
+        \hline
+        \multicolumn{10}{|c|}{\textbf{Ibrid Unsupervised}} \\
+        \hline
+        \textbf{KNN} & 0.531 & 0.6 & 0.048 &0.09  & 0.049 & 0.407& 0.294 &0.29 & 9.4s \\
+        \hline
+        \end{tabular}
+    \end{adjustbox}
+    \caption{Algoritmi eseguiti su dataset OPS\textunderscore SAT}
+    \label{tab:RocketOPS_SAT}
+\end{table}
